@@ -1,3 +1,4 @@
+// Package numbertowords allows numbers to be converted to English words.
 package numbertowords
 
 import (
