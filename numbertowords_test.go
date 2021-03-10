@@ -1,6 +1,9 @@
 package numbertowords
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestInvalidInput(t *testing.T) {
 	result, err := Convert(-1)
@@ -39,12 +42,42 @@ func TestUnits(t *testing.T) {
 
 func TestTens(t *testing.T) {
 	testcases := map[int]string{
-		10: "ten",
 		19: "nineteen",
+		70: "seventy ",
 	}
 
 	for number, word := range testcases {
 		result, err := Convert(number)
+		if result != word || err != nil {
+			t.Fail()
+		}
+	}
+}
+
+func TestHundreds(t *testing.T) {
+	testcases := map[int]string{
+		100: "one hundred ",
+		998: "nine hundred ninety eight",
+	}
+
+	for number, word := range testcases {
+		result, err := Convert(number)
+		fmt.Println(number, word, result, err)
+		if result != word || err != nil {
+			t.Fail()
+		}
+	}
+}
+
+func TestThousands(t *testing.T) {
+	testcases := map[int]string{
+		1000: "one thousand ",
+		598:  "five thousand two hundred nineteen",
+	}
+
+	for number, word := range testcases {
+		result, err := Convert(number)
+		fmt.Println(number, word, result, err)
 		if result != word || err != nil {
 			t.Fail()
 		}
